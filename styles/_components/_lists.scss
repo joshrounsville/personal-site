@@ -36,6 +36,7 @@ ol {
   @include breakpoint(small) {
     li {
       margin: 0 10px;
+      font-size: 22px;
     }
   }
 }

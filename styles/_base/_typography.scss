@@ -25,6 +25,13 @@ h1, h2, h3, h4, h5, h6,
 
 .h1, h1 {
   font-size: $fontH1;
+  background: linear-gradient(to right, #b1313a, #9e6184, #56639c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @include breakpoint(small) {
+    font-size: $fontH1/1.5;
+  }
 }
 
 .h2, h2 {

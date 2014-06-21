@@ -27,6 +27,8 @@ $colorText: $colorGrayDark !default;
 $colorHighlight: #ff0000 !default;
 $colorBtn: $colorHighlight !default;
 
+$colorLink: #9e6184 !default;
+
 
 /*==========  FONTS  ==========*/
 
@@ -34,7 +36,7 @@ $fontSmall: 13px !default;
 $fontBase: 16px  !default;
 $fontLarge: 20px !default;
 
-$fontH1: 40px !default;
+$fontH1: 70px !default;
 $fontH2: 34px !default;
 $fontH3: 28px !default;
 $fontH4: 22px !default;
@@ -44,8 +46,8 @@ $fontH6: 14px !default;
 $lineHeight: 1.5 !default;
 $lineHeightHeader: 1.2 !default;
 
-$fontDefault: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-$fontHighlight: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$fontDefault: "Merriweather", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$fontHighlight: "Merriweather", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
 
 $animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;

@@ -12,6 +12,7 @@ html {
   background: #fff;
   font-size: 62.5%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100%;
   @include breakpoint(medium) {
     -webkit-text-size-adjust: none;
   }
@@ -25,7 +26,7 @@ body {
   color: $colorText;
   margin: 0;
   line-height: $lineHeight;
-
+  height: 100%;
   @include breakpoint(medium) {
     margin-bottom: 1px;
   }

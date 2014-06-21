@@ -92,6 +92,10 @@
 
 .mar-t {
   margin-top: $margin;
+
+  @include breakpoint(small) {
+    margin-top: $margin/2;
+  }
 }
 
 .mar-t--2x {

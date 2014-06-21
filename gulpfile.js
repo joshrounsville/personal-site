@@ -1,148 +1,118 @@
-/**
- *
- *  Web Starter Kit
- *  Copyright 2014 Google Inc. All rights reserved.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License
- *
- */
-
 'use strict';
 
-// Include Gulp & Tools We'll Use
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var rimraf = require('rimraf');
-var runSequence = require('run-sequence');
-var browserSync = require('browser-sync');
-var pagespeed = require('psi');
-var reload = browserSync.reload;
+// call the plugins and set variables
 
-// Lint JavaScript
-gulp.task('jshint', function () {
-  return gulp.src('app/scripts/**/*.js')
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.jshint.reporter('fail'))
-    .pipe(reload({stream: true}));
+var gulp = require('gulp'),
+    autoprefixer = require('gulp-autoprefixer'),
+    sass = require('gulp-ruby-sass'),
+    minifycss = require('gulp-minify-css'),
+    uncss = require('gulp-uncss'),
+    imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache'),
+    jshint = require('gulp-jshint'),
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    livereload = require('gulp-livereload'),
+    connect = require ('connect'),
+    http = require('http'),
+    path = require('path'),
+    lr = require('tiny-lr'),
+    server = lr(),
+    cp  = require ('child_process'),
+    port = 3000,
+    gutil = require('gulp-util'),
+    concat = require('gulp-concat'),
+    rimraf = require('gulp-rimraf');
+
+
+
+
+// set basic tasks
+
+gulp.task('css', function() {
+  return gulp.src('./styles/styles.scss')
+    .pipe(sass({ style: 'expanded', lineNumbers: true }))
+    .on('error', gutil.log)
+    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(minifycss())
+    .pipe(gulp.dest('css'))
+    .pipe(livereload(server));
 });
 
-// Optimize Images
+gulp.task('uncss', function() {
+  return gulp.src('./css/styles.css')
+    .pipe(uncss({
+      html: ['index.html']
+    }))
+    .pipe(minifycss())
+    .pipe(gulp.dest('css'));
+});
+
+gulp.task('clear', function() {
+  return gulp.src('./css/*.scss', { read: false })
+    .pipe(rimraf({ force: true }));
+});
+
+gulp.task('lint', function() {
+  return gulp.src('./scripts/main.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+gulp.task('minify', function(){
+  gulp.src(['./scripts/plugins.js', './scripts/main.js', '!./scripts/vendor/*.js', '!./scripts/*.min.js'])
+    .pipe(concat('scripts.js'))
+    .pipe(uglify())
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest('./scripts/'))
+    .pipe(livereload(server));
+});
+
 gulp.task('images', function () {
-  return gulp.src('app/images/**/*')
-    .pipe($.cache($.imagemin({
-      progressive: true,
-      interlaced: true
-    })))
-    .pipe(gulp.dest('dist/images'))
-    .pipe(reload({stream: true, once: true}))
-    .pipe($.size({title: 'images'}));
+  return gulp.src('./images/**')
+    .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+    .pipe(livereload(server));
 });
 
-// Automatically Prefix CSS
-gulp.task('styles:css', function () {
-  return gulp.src('app/styles/**/*.css')
-    .pipe($.autoprefixer('last 1 version'))
-    .pipe(gulp.dest('app/styles'))
-    .pipe(reload({stream: true}))
-    .pipe($.size({title: 'styles:css'}));
+gulp.task('webserver', function() {
+  var hostname = null,
+      base = path.resolve('.'),
+      directory = path.resolve('.');
+
+  var app = connect()
+    .use(connect.static(base))
+    .use(connect.directory(directory))
+
+  http.createServer(app).listen(port, hostname);
 });
 
-// Compile Sass For Style Guide Components (app/styles/components)
-gulp.task('styles:components', function () {
-  return gulp.src('app/styles/components/components.scss')
-    .pipe($.rubySass({
-      style: 'expanded',
-      precision: 10,
-      loadPath: ['app/styles/components']
-    }))
-    .pipe($.autoprefixer('last 1 version'))
-    .pipe(gulp.dest('app/styles/components'))
-    .pipe($.size({title: 'styles:components'}));
-});
 
-// Compile Any Other Sass Files You Added (app/styles)
-gulp.task('styles:scss', function () {
-  return gulp.src(['app/styles/**/*.scss', '!app/styles/components/components.scss'])
-    .pipe($.rubySass({
-      style: 'expanded',
-      precision: 10,
-      loadPath: ['app/styles']
-    }))
-    .pipe($.autoprefixer('last 1 version'))
-    .pipe(gulp.dest('.tmp/styles'))
-    .pipe($.size({title: 'styles:scss'}));
-});
 
-// Output Final CSS Styles
-gulp.task('styles', ['styles:components', 'styles:scss', 'styles:css']);
+// set working tasks
 
-// Scan Your HTML For Assets & Optimize Them
-gulp.task('html', function () {
-  return gulp.src('app/**/*.html')
-    .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
-    // Concatenate And Minify JavaScript
-    .pipe($.if('*.js', $.uglify()))
-    // Concatenate And Minify Styles
-    .pipe($.if('*.css', $.csso()))
-    // Remove Any Unused CSS
-    // Note: If not using the Style Guide, you can delete it from
-    // the next line to only include styles your project uses.
-    .pipe($.if('*.css', $.uncss({ html: ['app/index.html','app/styleguide/index.html'] })))
-    .pipe($.useref.restore())
-    .pipe($.useref())
-    // Update Production Style Guide Paths
-    .pipe($.replace('components/components.css', 'components/main.min.css'))
-    // Minify Any HTML
-    .pipe($.minifyHtml())
-    // Output Files
-    .pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'html'}));
-});
+gulp.task('default', [ 'css', 'lint', 'minify' ]);
 
-// Clean Output Directory
-gulp.task('clean', function (cb) {
-  rimraf('dist', rimraf.bind({}, '.tmp', cb));
-});
+gulp.task('clean', ['uncss', 'images', 'clear']);
 
-// Watch Files For Changes & Reload
-gulp.task('serve', function () {
-  browserSync.init({
-    server: {
-      baseDir: ['app', '.tmp']
-    },
-    notify: false
+gulp.task('dev', [ 'default', 'webserver' ], function() {
+
+  setTimeout(function() {
+    cp.exec('open http://localhost:' + port);
+  }, 1000);
+
+  server.listen(35729, function (err) {
+    if (err) {
+      return console.log(err)
+    };
+
+    gulp.watch('./styles/**/*.scss', [ 'css', 'clear' ]);
+
+    gulp.watch('./scripts/main.js', [ 'lint' ] );
+
+    gulp.watch('./scripts/*.js', [ 'minify' ]);
+
   });
 
-  gulp.watch(['app/**/*.html'], reload);
-  gulp.watch(['app/styles/**/*.{css,scss}'], ['styles']);
-  gulp.watch(['.tmp/styles/**/*.css'], reload);
-  gulp.watch(['app/scripts/**/*.js'], ['jshint']);
-  gulp.watch(['app/images/**/*'], ['images']);
 });
-
-// Build Production Files, the Default Task
-gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'html', 'images'], cb);
-});
-
-// Run PageSpeed Insights
-// Update `url` below to the public URL for your site
-gulp.task('pagespeed', pagespeed.bind(null, {
-  // By default, we use the PageSpeed Insights
-  // free (no API key) tier. You can use a Google
-  // Developer API key if you have one. See
-  // http://goo.gl/RkN0vE for info key: 'YOUR_API_KEY'
-  url: 'https://example.com',
-  strategy: 'mobile'
-}));

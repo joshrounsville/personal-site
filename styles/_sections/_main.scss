@@ -10,9 +10,19 @@
     width: 100%;
     height: 4px;
     background: linear-gradient(to right, #b1313a, #9e6184, #56639c);
+    animation: width .5s .6s both;
   }
 
   @include breakpoint(small) {
     padding-bottom: 100px;
+  }
+}
+
+.full-height {
+  h1 {
+    animation: fadeIn .4s .2s both;
+  }
+  h4 {
+    animation: fadeIn .4s .4s both;
   }
 }

@@ -26,7 +26,6 @@ h1, h2, h3, h4, h5, h6,
 .h1, h1 {
   font-size: $fontH1;
   color: #9e6184;
-
   .fancy-text & {
     background: linear-gradient(to right, #b1313a, #9e6184, #56639c);
     -webkit-background-clip: text;

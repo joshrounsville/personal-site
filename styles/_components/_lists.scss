@@ -91,4 +91,11 @@ ol {
       transition: transform .3s ease;
     }
   }
+
+  @include breakpoint(small) {
+    a {
+      display: block;
+      padding: 3px 0 8px;
+    }
+  }
 }

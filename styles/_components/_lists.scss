@@ -59,6 +59,12 @@ ol {
   @include breakpoint(large) {
     font-size: 14px;
   }
+  @include breakpoint(small) {
+    font-size: 14px;
+    li {
+      margin-bottom: 5px;
+    }
+  }
 }
 
 .list-experience {

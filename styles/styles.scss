@@ -12,17 +12,15 @@
 
 
 /**** import components ****/
-@import "_components/buttons", "_components/icons", "_components/font-awesome";
-@import "_components/forms", "_components/tables";
-@import "_components/lists", "_components/links", "_components/media";
+@import "_components/font-awesome";
+@import "_components/lists", "_components/links";
 
 
 /**** import sections ****/
-@import "_sections/nav", "_sections/header", "_sections/footer", "_sections/main";
+@import "_sections/footer", "_sections/main";
 
 
 /**** import pages ****/
-@import "_pages/home";
 
 
 /**** import animations ****/
@@ -37,3 +35,17 @@
 @media print {
   @import "_utilities/print";
 }
+
+
+/** Unused **/
+
+/**
+"_components/buttons"
+"_components/icons"
+"_components/forms"
+"_components/tables"
+"_components/media"
+"_sections/nav"
+"_sections/header"
+"_pages/home"
+**/

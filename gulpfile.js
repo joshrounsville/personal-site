@@ -94,7 +94,7 @@ gulp.task('webserver', function() {
 
 gulp.task('default', [ 'css', 'lint', 'minify' ]);
 
-gulp.task('clean', ['uncss', 'images', 'clear']);
+gulp.task('clean', ['images', 'clear']);
 
 gulp.task('dev', [ 'default', 'webserver' ], function() {
 

@@ -6,23 +6,12 @@
 a {
   color: $colorLink;
   text-decoration: none;
-  transition: all .5s ease;
+  transition: all .25s ease;
   display: block;
-  width: 56px;
-  height: 56px;
-  border: 2px solid $colorLink;
-  border-radius: 100%;
-  text-align: center;
-  padding: 4px 0 0 0;
+  color: #b1313a;
   &:hover,
   &:focus {
-    color: darken($colorLink, 15%);
-    border-color: darken($colorLink, 15%);
-  }
-
-  @include breakpoint(small) {
-    width: 44px;
-    height: 44px;
+    color: #9e6184;
   }
 }
 

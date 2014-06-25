@@ -10,6 +10,26 @@
 
 /*==========  WIDTH  ==========*/
 
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  10% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+}
+
+
+/*==========  WIDTH  ==========*/
+
 @keyframes width {
   0% {
     width: 0;

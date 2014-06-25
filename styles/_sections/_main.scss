@@ -35,3 +35,15 @@
     }
   }
 }
+
+.arrow-down {
+  font-size: 54px;
+  color: #9e6184;
+  position: relative;
+  bottom: -140px;
+  animation: fadeInDown 1.5s 1s ease-in-out;
+  opacity: 0;
+  @include breakpoint(small) {
+    display: none;
+  }
+}

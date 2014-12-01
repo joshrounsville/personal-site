@@ -22,7 +22,8 @@ var gulp = require('gulp'),
     port = 3000,
     gutil = require('gulp-util'),
     concat = require('gulp-concat'),
-    rimraf = require('gulp-rimraf');
+    rimraf = require('gulp-rimraf'),
+    critical = require('critical');
 
 
 

@@ -33,7 +33,20 @@ ol {
 .list--inline {
   li {
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 10px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  @include breakpoint(medium) {
+    li {
+      margin: 0 15px;
+    }
   }
 }
 
@@ -44,12 +57,12 @@ ol {
      &:after {
       content: "";
       position: absolute;
-      right: -19px;
+      right: -13px;
       top: 50%;
       margin-top: -3px;
       background-color: #9e6184;
-      width: 6px;
-      height: 6px;
+      width: 4px;
+      height: 4px;
       border-radius: 100%;
       display: block;
     }
@@ -62,7 +75,11 @@ ol {
 
   @include breakpoint(medium) {
     li {
-
+      &:after {
+        width: 6px;
+        height: 6px;
+        right: -19px;
+      }
     }
   }
 }
@@ -80,10 +97,9 @@ ol {
   }
   a {
     display: block;
-    padding: 3px 0 8px;
+    padding: 5px 0 10px;
     font-size: 11px;
     text-transform: uppercase;
-    margin-left: 15px;
     &:hover,
     &:focus {
       .icon {
@@ -95,9 +111,18 @@ ol {
       transition: transform $timing $easing;
     }
   }
+  strong {
+    display: block;
+    padding: 5px 0 0 0;
+  }
 
   @include breakpoint(medium) {
     a {
+      display: inline;
+      padding: 0;
+      margin-left: 15px;
+    }
+    strong {
       display: inline;
       padding: 0;
     }

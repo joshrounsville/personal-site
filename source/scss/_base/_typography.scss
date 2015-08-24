@@ -3,10 +3,9 @@
 ========================================================================== */
 
 
-// html, body, button {
-//   -webkit-font-smoothing: antialiased;
-// }
-
+html, body, button {
+  -webkit-font-smoothing: antialiased;
+}
 
 body, html {
   height: 100%;
@@ -15,8 +14,12 @@ body, html {
 body {
   color: $color-body-text;
   line-height: $line-height;
-  @include font-size($font-base);
+  @include font-size($font-base - 2);
   @include font-regular();
+
+  @include breakpoint(medium) {
+    @include font-size($font-base);
+  }
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -35,7 +38,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-  @include font-size($font-h1);
+  @include font-size($font-h1 - 35);
   color: #9e6184;
   padding-top: 100px;
   padding-bottom: 5px;
@@ -48,6 +51,7 @@ h1, .h1 {
 
   @include breakpoint(medium) {
     padding: 0;
+    @include font-size($font-h1);
   }
 }
 
@@ -56,11 +60,19 @@ h2, .h2 {
 }
 
 h3, .h3 {
-  @include font-size($font-h3);
+  @include font-size($font-h3 - 4);
+
+  @include breakpoint(medium) {
+    @include font-size($font-h3);
+  }
 }
 
 h4, .h4 {
-  @include font-size($font-h4);
+  @include font-size($font-h4 - 2);
+
+  @include breakpoint(medium) {
+    @include font-size($font-h4);
+  }
 }
 
 h5, .h5 {

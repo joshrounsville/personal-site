@@ -1,4 +1,4 @@
-# Starter Files V 3.0.0
+# JoshRounsville.com v 2.1
 Based on Nathan Searles [Day One Gulp Starter Kit](https://github.com/nathansearles/Day-One-Gulp-Starter-Kit)
 
 ## Installing

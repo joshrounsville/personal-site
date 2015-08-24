@@ -1,0 +1,37 @@
+/* ==========================================================================
+  Main
+========================================================================== */
+
+
+.canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.full-height {
+  position: relative;
+  overflow: hidden;
+  @include breakpoint(medium) {
+    h1 {
+      animation: fadeIn $timing-long .2s both;
+    }
+    h4 {
+      animation: fadeIn $timing-long .3s both;
+    }
+  }
+}
+
+.arrow-down {
+  position: relative;
+  bottom: -140px;
+  animation: fadeInDown 1.5s 1s both;
+  opacity: 0;
+  display: none;
+
+  @include breakpoint(medium) {
+    display: block;
+  }
+}

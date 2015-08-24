@@ -1,0 +1,83 @@
+/* ==========================================================================
+  Typography
+========================================================================== */
+
+
+// html, body, button {
+//   -webkit-font-smoothing: antialiased;
+// }
+
+
+body, html {
+  height: 100%;
+}
+
+body {
+  color: $color-body-text;
+  line-height: $line-height;
+  @include font-size($font-base);
+  @include font-regular();
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+p, ul, ol {
+  padding: 0 0 15px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  line-height: $line-height-header;
+  text-rendering: optimizeLegibility;
+  @include font-highlight();
+}
+
+h1, .h1 {
+  @include font-size($font-h1);
+  color: #9e6184;
+  padding-top: 100px;
+  padding-bottom: 5px;
+
+  .fancy-text & {
+    background: linear-gradient(to right, #b1313a, #9e6184, #56639c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @include breakpoint(medium) {
+    padding: 0;
+  }
+}
+
+h2, .h2 {
+  @include font-size($font-h2);
+}
+
+h3, .h3 {
+  @include font-size($font-h3);
+}
+
+h4, .h4 {
+  @include font-size($font-h4);
+}
+
+h5, .h5 {
+  @include font-size($font-h5);
+}
+
+h6, .h6 {
+  @include font-size($font-h6);
+}
+
+
+.small,
+small {
+  @include font-size($font-small);
+}
+
+.strong,
+strong {
+  font-weight: bold;
+}

@@ -1,4 +1,4 @@
-# JoshRounsville.com v 2.1
+# JoshRounsville.com v 3.0
 Based on Nathan Searles [Day One Gulp Starter Kit](https://github.com/nathansearles/Day-One-Gulp-Starter-Kit)
 
 ## Installing
@@ -8,11 +8,7 @@ Based on Nathan Searles [Day One Gulp Starter Kit](https://github.com/nathansear
 
 3. Install all the npm dependencies you need for Gulp from within your project folder. `npm install`
 
-4. Install Bower `sudo npm install -g bower`
-
-5. Install all the Bower dependencies you'll need. `bower install`
-
-6. All done! You can now `gulp`.
+4. All done! You can now `gulp`.
 
 ## Usage
 Use `gulp` for local development or `gulp build` for deployment to a staging or production environment.

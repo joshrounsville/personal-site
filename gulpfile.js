@@ -5,7 +5,7 @@
 /* ====================================
  * Define paths
  * ==================================== */
-var source = 'source';
+var source = '_source';
 var build = 'build';
 
 
@@ -19,7 +19,6 @@ var reload = browserSync.reload;
 var runSequence = require('run-sequence');
 var del = require('del');
 var es = require('event-stream');
-var bowerFiles = require('main-bower-files');
 
 var plumberConfig = {errorHandler: $.notify.onError("Error: <%= error.message %>")};
 
@@ -44,9 +43,7 @@ gulp.task('serve', ['watch'], function(){
 gulp.task('styles', function () {
   return gulp.src(source + '/scss/**/components.scss')
     .pipe($.plumber(plumberConfig))
-    .pipe($.rubySass({
-      'sourcemap=none': true
-    }))
+    .pipe($.sass())
     .pipe($.autoprefixer((["last 2  version", "> 1%", "ie 8", "ie 7"], { cascade: true })))
     .pipe(gulp.dest(build + '/css/'));
 });
@@ -75,7 +72,7 @@ gulp.task('scripts', function () {
 gulp.task('images', function() {
   return gulp.src([ source + '/img/**/*'])
     .pipe($.plumber(plumberConfig))
-    .pipe($.imagemin({
+    .pipe($.cache($.imagemin({
       optimizationLevel: 3,
       progressive: true,
       interlaced: true,
@@ -83,7 +80,7 @@ gulp.task('images', function() {
         { removeViewBox: false },
         { removeUselessStrokeAndFill: false }
       ],
-    }))
+    })))
     .pipe(gulp.dest(build + '/img'));
 });
 
@@ -92,12 +89,6 @@ gulp.task('images', function() {
  * HTML
  * ==================================== */
 gulp.task('html-default', function() {
-
-  var vendorjs = gulp.src(bowerFiles())
-    .pipe($.plumber(plumberConfig))
-    .pipe($.filter('**/*.js'))
-    .pipe(gulp.dest(build + '/js/vendor'));
-
   var modernizrjs = gulp.src(source + '/js/vendor/modernizr.js')
     .pipe($.plumber(plumberConfig))
     .pipe(gulp.dest(build + '/js/vendor'));
@@ -108,9 +99,7 @@ gulp.task('html-default', function() {
 
   var styles = gulp.src(source + '/scss/**/components.scss')
     .pipe($.plumber(plumberConfig))
-    .pipe($.rubySass({
-      'sourcemap=none': true
-    }))
+    .pipe($.sass())
     .pipe($.autoprefixer((["last 2 version", "> 1%", "ie 8", "ie 7"], { cascade: true })))
     .pipe(gulp.dest(build + '/css/'));
 
@@ -121,21 +110,12 @@ gulp.task('html-default', function() {
     .pipe($.plumber(plumberConfig))
     .pipe($.fileInclude({
       prefix: '@@',
-      basepath: 'source/'
+      basepath: '_source/'
     }))
     .pipe($.inject(modernizrjs,
       { ignorePath: [build, source],
         addRootSlash: true,
         starttag: '<!-- inject:modernizr -->'
-      }
-    ))
-    .pipe($.inject(es.merge(
-        vendorjs
-      ),
-      {
-        name: 'bower',
-        ignorePath: [build, source],
-        addRootSlash: true
       }
     ))
     .pipe($.inject(es.merge(
@@ -158,14 +138,6 @@ gulp.task('html-build', function() {
     .pipe($.rename({suffix: '.min'}))
     .pipe(gulp.dest(build + '/js/vendor'));
 
-  var vendorjs = gulp.src(bowerFiles())
-    .pipe($.plumber(plumberConfig))
-    .pipe($.filter('**/*.js'))
-    .pipe($.concat('bower.js'))
-    .pipe($.uglify())
-    .pipe($.rename({suffix: '.min'}))
-    .pipe(gulp.dest(build + '/js/vendor'));
-
   var scripts = gulp.src([source + '/js/plugins.js', source + '/js/scripts.js'])
     .pipe($.plumber(plumberConfig))
     .pipe($.concat('scripts.js'))
@@ -174,12 +146,10 @@ gulp.task('html-build', function() {
 
   var styles = gulp.src(source + '/scss/**/*.scss')
     .pipe($.plumber(plumberConfig))
-    .pipe($.rubySass({
-      'sourcemap=none': true
-    }))
+    .pipe($.sass())
     .pipe($.concat('styles.css'))
     .pipe($.autoprefixer((["last 2 version", "> 1%", "ie 8", "ie 7"], { cascade: true })))
-    .pipe($.minifyCss())
+    .pipe($.cssnano())
     .pipe($.rename({suffix: '.min'}))
     .pipe(gulp.dest(build + '/css/'));
 
@@ -190,21 +160,12 @@ gulp.task('html-build', function() {
     .pipe($.plumber(plumberConfig))
     .pipe($.fileInclude({
       prefix: '@@',
-      basepath: 'source/'
+      basepath: '_source/'
     }))
     .pipe($.inject(modernizrjs,
       { ignorePath: [build, source],
         addRootSlash: true,
         starttag: '<!-- inject:modernizr -->'
-      }
-    ))
-    .pipe($.inject(es.merge(
-        vendorjs
-      ),
-      {
-        name: 'bower',
-        ignorePath: [build, source],
-        addRootSlash: true
       }
     ))
     .pipe($.inject(es.merge(
@@ -216,8 +177,17 @@ gulp.task('html-build', function() {
         addRootSlash: true
       }
     ))
+    .pipe($.htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(build));
   });
+
+
+/* ====================================
+ * Clear the image cache
+ * ==================================== */
+gulp.task('clear', function (done) {
+  return $.cache.clearAll(done);
+});
 
 
 /* ====================================
@@ -230,7 +200,7 @@ gulp.task('clean', del.bind(null, [build + '/*'], {dot: true}));
  * Copy files
  * ==================================== */
 gulp.task('copyfiles', function() {
-  return gulp.src([source + '/**/*.{ttf,woff,woff2,eof,svg,ico,xml,txt,png}', source + '/.htaccess'])
+  return gulp.src([source + '/**/*.{ttf,woff,woff2,eot,svg,ico,xml,txt}', source + '/.htaccess'])
     .pipe($.plumber(plumberConfig))
     .pipe(gulp.dest(build));
 });

@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install packages
-        run: npm ci
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
       - name: Prettier
-        run: npm run format
+        run: yarn format
       - name: Lint
-        run: npm run lint
+        run: yarn lint
       - name: Typecheck
-        run: npm run typecheck
+        run: yarn typecheck
       - name: Gatsby build
-        run: npm run build
+        run: yarn build

@@ -1,0 +1,24 @@
+name: Test site code
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+concurrency:
+  group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+  cancel-in-progress: true
+jobs:
+  test:
+    name: Test site code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm ci
+      - name: Prettier
+        run: npm run format
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Gatsby build
+        run: npm run build

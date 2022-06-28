@@ -1,0 +1,26 @@
+{
+  "presets": [["babel-preset-gatsby"]],
+  "plugins": [
+    [
+      // The "module-resolver" plugin is used so our "component/*" imports work with absolute file paths.
+      // Normally, this wouldn't be needed, since that's what tsconfig.json's compilerOptions.paths mapping does.
+      // However, Gatsby uses with @babel/preset-typescript internally, which ignores tsconfig.json, so this plugin's
+      // configuration attempts to re-apply that mapping.
+      // Additional ./src/* folders will need to be added here as they're created.
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "assets": "./src/assets",
+          "components": "./src/components",
+          "constants": "./src/constants",
+          "hooks": "./src/hooks",
+          "pages": "./src/pages",
+          "styles": "./src/styles",
+          "types": "./src/types",
+          "utils": "./src/utils"
+        }
+      }
+    ]
+  ]
+}

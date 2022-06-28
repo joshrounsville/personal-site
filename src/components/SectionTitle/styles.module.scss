@@ -1,0 +1,36 @@
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
+
+.title {
+  background-color: white;
+  color: red;
+  padding: 0 50px;
+  min-width: 200px;
+}
+
+.borders {
+  &:before,
+  &:after {
+    content: " ";
+    display: block;
+    width: 50%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    z-index: -1;
+  }
+
+  &:before {
+    background: linear-gradient(90deg, #b1313a, #9e6184, #56639c);
+    left: 0;
+  }
+
+  &:after {
+    background: linear-gradient(90deg, #56639c, #9e6184, #b1313a);
+    right: 0;
+  }
+}

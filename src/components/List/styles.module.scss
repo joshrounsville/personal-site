@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+
+.list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.listItem {
+  display: flex;
+
+  &:not(:last-of-type) {
+    padding: 0 0 15px;
+  }
+}

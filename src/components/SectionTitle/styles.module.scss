@@ -1,3 +1,11 @@
+@import "../../styles/typography.scss";
+@import "../../styles/colors.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .titleContainer {
   display: flex;
   justify-content: center;
@@ -6,10 +14,12 @@
 }
 
 .title {
+  @include font-style-heading-3;
+
   background-color: white;
-  color: red;
+  color: $gray;
   padding: 0 50px;
-  min-width: 200px;
+  min-width: 300px;
 }
 
 .borders {
@@ -25,12 +35,12 @@
   }
 
   &:before {
-    background: linear-gradient(90deg, #b1313a, #9e6184, #56639c);
+    background: linear-gradient(90deg, $red, $pink, $blue);
     left: 0;
   }
 
   &:after {
-    background: linear-gradient(90deg, #56639c, #9e6184, #b1313a);
+    background: linear-gradient(90deg, $blue, $pink, $red);
     right: 0;
   }
 }

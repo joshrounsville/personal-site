@@ -1,0 +1,17 @@
+@import "../media-queries";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.disableVerticalScroll {
+  @include for-custom-size($screen-small-min - 1, $is-min-width: false) {
+    position: fixed;
+    width: 100%;
+  }
+
+  -webkit-overflow-scrolling: none;
+  overflow-y: hidden;
+  overscroll-behavior: none;
+  touch-action: none; // iOS 13+
+}

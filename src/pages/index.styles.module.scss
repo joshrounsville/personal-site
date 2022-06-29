@@ -1,3 +1,20 @@
+.wrapper {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 .sectionTitle {
+  flex: 1;
+  padding-bottom: 50px;
+  width: 100%;
+
+  &:not(:first-of-type) {
+    padding-top: 100px;
+  }
+}
+
+.spacer {
   padding-bottom: 50px;
 }

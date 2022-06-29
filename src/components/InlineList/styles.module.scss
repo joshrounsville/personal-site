@@ -1,0 +1,40 @@
+@import "../../styles/colors.scss";
+
+$listSpacer: 15px;
+
+.container {
+  display: flex;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  display: flex;
+  margin: 0 $listSpacer;
+  position: relative;
+
+  &:not(:last-of-type) {
+    &:after {
+      content: "";
+      position: absolute;
+      right: -#{$listSpacer + 2}; // +2 to account for the width of the bullet
+      top: 50%;
+      margin-top: -3px;
+      background-color: $pink;
+      width: 4px;
+      height: 4px;
+      border-radius: 100%;
+      display: block;
+    }
+  }
+
+  &:first-of-type {
+    margin-left: 0px;
+  }
+  &:last-of-type {
+    margin-right: 0px;
+  }
+}

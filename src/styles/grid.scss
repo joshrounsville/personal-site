@@ -1,0 +1,82 @@
+@import "./media-queries";
+
+$col-count: 4;
+$col-count-small: 8;
+$col-count-medium: 12;
+$col-count-large: 12;
+
+$col-gap: 16px;
+$col-gap-small: 16px;
+$col-gap-medium: 24px;
+$col-gap-large: 24px;
+
+$row-horizontal-padding: 24px;
+$row-horizontal-padding-small: 24px;
+$row-horizontal-padding-medium: 32px;
+$row-horizontal-padding-large: 32px;
+
+@mixin grid-row($isFullWidth: false) {
+  column-gap: $col-gap;
+  display: grid;
+  grid-template-columns: repeat($col-count, minmax(0, 1fr));
+
+  @if $isFullWidth {
+    padding-left: 0;
+    padding-right: 0;
+  } @else {
+    padding-left: $row-horizontal-padding;
+    padding-right: $row-horizontal-padding;
+  }
+
+  @include for-size($small) {
+    column-gap: $col-gap-small;
+    grid-template-columns: repeat($col-count-small, minmax(0, 1fr));
+
+    @if $isFullWidth {
+      padding-left: 0;
+      padding-right: 0;
+    } @else {
+      padding-left: $row-horizontal-padding-small;
+      padding-right: $row-horizontal-padding-small;
+    }
+  }
+
+  @include for-size($medium) {
+    column-gap: $col-gap-medium;
+    grid-template-columns: repeat($col-count-medium, minmax(0, 1fr));
+
+    @if $isFullWidth {
+      padding-left: 0;
+      padding-right: 0;
+    } @else {
+      padding-left: $row-horizontal-padding-medium;
+      padding-right: $row-horizontal-padding-medium;
+    }
+  }
+
+  @include for-size($large) {
+    column-gap: $col-gap-large;
+    grid-template-columns: repeat($col-count-large, minmax(0, 1fr));
+
+    @if $isFullWidth {
+      padding-left: 0;
+      padding-right: 0;
+    } @else {
+      padding-left: $row-horizontal-padding-large;
+      padding-right: $row-horizontal-padding-large;
+    }
+  }
+}
+
+@mixin mini-grid-container() {
+  column-gap: 2px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 200px;
+  row-gap: 2px;
+
+  @include for-size($medium) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    min-height: 300px;
+  }
+}

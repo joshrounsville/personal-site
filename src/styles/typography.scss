@@ -1,0 +1,48 @@
+@import "./media-queries";
+
+@mixin font-size($size, $lineHeight) {
+  font-size: (calc($size / 10px)) * 1rem;
+  line-height: calc($lineHeight / $size);
+}
+
+@mixin font-family-merriweather($weight) {
+  font-family: "Merriweather", Helvetica, Arial, serif;
+  font-weight: $weight;
+}
+
+@mixin font-style-heading-1 {
+  @include font-family-merriweather(400);
+  @include font-size(40px, 44px);
+
+  @include for-size($medium) {
+    @include font-size(50px, 55px);
+  }
+}
+
+@mixin font-style-heading-2 {
+  @include font-family-merriweather(400);
+  @include font-size(40px, 44px);
+
+  @include for-size($medium) {
+    @include font-size(50px, 55px);
+  }
+}
+
+@mixin font-style-heading-3 {
+  @include font-family-merriweather(400);
+  @include font-size(24px, 28px);
+
+  @include for-size($medium) {
+    @include font-size(22px, 26px);
+  }
+}
+
+@mixin font-style-body-md {
+  @include font-family-merriweather(300);
+  @include font-size(18px, 24px);
+}
+
+@mixin font-style-body-sm {
+  @include font-family-merriweather(300);
+  @include font-size(16px, 22px);
+}

@@ -18,6 +18,7 @@
     "format": "prettier --parser typescript --write \"./src/**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "dependencies": {
+    "@fontsource/merriweather": "^4.5.12",
     "classnames": "^2.3.1",
     "gatsby": "^4.17.1",
     "gatsby-plugin-google-analytics": "^4.17.0",

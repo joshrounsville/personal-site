@@ -21,19 +21,19 @@
 
 @mixin font-style-heading-2 {
   @include font-family-merriweather(400);
-  @include font-size(40px, 44px);
+  @include font-size(30px, 34px);
 
   @include for-size($medium) {
-    @include font-size(50px, 55px);
+    @include font-size(32px, 36px);
   }
 }
 
 @mixin font-style-heading-3 {
   @include font-family-merriweather(400);
-  @include font-size(24px, 28px);
+  @include font-size(22px, 26px);
 
   @include for-size($medium) {
-    @include font-size(22px, 26px);
+    @include font-size(24px, 28px);
   }
 }
 

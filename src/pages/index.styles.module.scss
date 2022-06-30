@@ -1,20 +1,78 @@
-.wrapper {
-  align-items: center;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
+@import "../styles/colors.scss";
+@import "../styles/typography.scss";
 
-.sectionTitle {
-  flex: 1;
-  padding-bottom: 50px;
-  width: 100%;
-
-  &:not(:first-of-type) {
-    padding-top: 100px;
+@keyframes backgroundColorPalette {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-.spacer {
-  padding-bottom: 50px;
+.homePage {
+  animation: backgroundColorPalette 30s infinite;
+  min-height: 100vh;
+  background: linear-gradient(
+    45deg,
+    darken($pink, 10%) 0%,
+    darken($blue, 10%) 50%,
+    darken($red, 10%) 100%
+  );
+  background-size: 400% 400%;
+}
+
+.wrapper {
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.title {
+  @include font-style-heading-1;
+
+  background: linear-gradient(
+    90deg,
+    lighten($red, 32%),
+    lighten($pink, 32%),
+    lighten($blue, 32%)
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 40px;
+}
+
+.subtitle {
+  @include font-style-body-md;
+  color: lighten($pink, 25%);
+  padding: 0 0 10px;
+}
+
+.emailLink {
+  @include font-style-body-md;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(
+      90deg,
+      lighten($red, 32%),
+      lighten($pink, 32%),
+      lighten($blue, 32%)
+    )
+    1;
+  color: lighten($pink, 25%);
+  transition: border 200ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    border-image: linear-gradient(
+        90deg,
+        lighten($red, 12%),
+        lighten($pink, 12%),
+        lighten($blue, 12%)
+      )
+      1;
+  }
 }

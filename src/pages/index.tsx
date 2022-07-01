@@ -4,7 +4,7 @@ import { PageWrapper } from "components/PageWrapper"
 
 import * as styles from "./index.styles.module.scss"
 
-const IndexPage = () => {
+function IndexPage() {
   return (
     <PageWrapper htmlClassName={styles.homePage} className={styles.wrapper}>
       <h1 className={styles.title}>Josh Rounsville</h1>

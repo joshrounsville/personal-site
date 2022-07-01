@@ -1,0 +1,25 @@
+@import "../styles/colors.scss";
+@import "../styles/typography.scss";
+
+.wrapper {
+  padding: 20px;
+  &:after {
+    content: "";
+    display: block;
+    border: 10px solid;
+    border-image: linear-gradient(
+        90deg,
+        lighten($red, 27%),
+        lighten($pink, 25%),
+        lighten($blue, 25%)
+      )
+      1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+}

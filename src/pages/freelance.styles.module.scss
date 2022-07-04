@@ -1,8 +1,13 @@
 @import "../styles/colors.scss";
 @import "../styles/typography.scss";
+@import "../styles/media-queries.scss";
+
+$pagePadding: 40px;
+$linePadding: 7px;
 
 .wrapper {
-  padding: 20px;
+  padding: $pagePadding;
+
   &:after {
     content: "";
     display: block;
@@ -21,5 +26,59 @@
     left: 0;
     pointer-events: none;
     z-index: -1;
+  }
+}
+
+.header {
+  padding-bottom: $pagePadding;
+
+  @include for-size($medium) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.title {
+  padding-bottom: $linePadding;
+}
+
+.subtitle {
+  padding-bottom: $linePadding;
+
+  @include for-size($medium) {
+    padding-bottom: 0;
+  }
+}
+
+.list {
+  padding-bottom: $pagePadding;
+
+  li {
+    &:not(:last-of-type) {
+      padding: 0 0 $linePadding;
+    }
+  }
+}
+
+.link {
+  border-bottom: 1px solid;
+  border-image: linear-gradient(
+      90deg,
+      lighten($red, 22%),
+      lighten($pink, 22%),
+      lighten($blue, 22%)
+    )
+    1;
+  transition: border 200ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    border-image: linear-gradient(
+        90deg,
+        lighten($red, 2%),
+        lighten($pink, 2%),
+        lighten($blue, 2%)
+      )
+      1;
   }
 }

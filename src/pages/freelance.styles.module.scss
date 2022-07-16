@@ -82,3 +82,9 @@ $linePadding: 7px;
       1;
   }
 }
+
+.description {
+  color: $lightGray;
+  display: block;
+  padding: $linePadding 0 $linePadding * 2;
+}

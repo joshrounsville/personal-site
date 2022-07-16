@@ -9,7 +9,9 @@ function FreelancePage() {
     <PageWrapper className={styles.wrapper}>
       <header className={styles.header}>
         <div className={styles.headerInfo}>
-          <h1 className={styles.title}>Josh Rounsville</h1>
+          <h1 className={styles.title}>
+            <a href="/">Josh Rounsville</a>
+          </h1>
           <h2 className={styles.subtitle}>Web and Native App Development</h2>
         </div>
         <p>
@@ -66,6 +68,14 @@ function FreelancePage() {
           <a href="https://aesop.com" className={styles.link}>
             Aesop
           </a>
+
+          <ul className={styles.description}>
+            <li>Led the front-end build for global ecommerce site</li>
+            <li>React + Custom static renderer</li>
+            <li>
+              Redux/Reselect/Thunk + Adyen payments + Google Maps instegration
+            </li>
+          </ul>
         </li>
         <li>
           <a
@@ -73,8 +83,14 @@ function FreelancePage() {
             className={styles.link}
           >
             Equinox+
-          </a>{" "}
-          iOS and Android Apps (React Native)
+          </a>
+          <ul className={styles.description}>
+            <li>
+              Worked with agency and product teams to build iOS and Android Apps
+            </li>
+            <li>React Native</li>
+            <li>GraphQL/Apollo + Typescript + Lottie & D3 animations</li>
+          </ul>
         </li>
         <li>
           <a
@@ -82,23 +98,34 @@ function FreelancePage() {
             className={styles.link}
           >
             Daily Harvest
-          </a>{" "}
-          iOS and Android App (React Native)
+          </a>
+          <ul className={styles.description}>
+            <li>
+              Defined and led re-architecture build for iOS and Android Apps
+            </li>
+            <li>React Native</li>
+            <li>Redux/Sagas + Flow types</li>
+          </ul>
         </li>
         <li>
           <a href="https://www.hrblock.com/" className={styles.link}>
             H&R Block
           </a>
+          <ul className={styles.description}>
+            <li>Led build of framework-agnostic design system</li>
+            <li>Web components + Typescript</li>
+          </ul>
         </li>
         <li>
           <a href="https://myhopcard.com/home/" className={styles.link}>
             Hop Card Fastpass
           </a>
-        </li>
-        <li>
-          <a href="https://lunarsaloon.com/" className={styles.link}>
-            Lunar Saloon
-          </a>
+          <ul className={styles.description}>
+            <li>
+              Led front-end build for public transportation digital platform
+            </li>
+            <li>Angular + Node server</li>
+          </ul>
         </li>
       </ul>
 

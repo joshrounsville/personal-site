@@ -131,13 +131,11 @@ function FreelancePage() {
 
       <ul className={styles.list}>
         <li>
-          <strong>Rate:</strong> $150/hr
-        </li>
-        <li>
-          Alternatively a project rate can be arranged on a case-by-case basis
-        </li>
-        <li>
           <strong>Availability:</strong> 10-20 hours/week
+        </li>
+        <li>
+          Project costs determined by much discussion and thought,
+          <br /> but are generally built around a <strong>$150/hr rate</strong>
         </li>
       </ul>
     </PageWrapper>

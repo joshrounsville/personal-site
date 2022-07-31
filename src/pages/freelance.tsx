@@ -134,7 +134,7 @@ function FreelancePage() {
           <strong>Availability:</strong> 10-20 hours/week
         </li>
         <li>
-          Project costs determined by much discussion and thought,
+          Project costs are determined after much discussion and thought,
           <br /> but are generally built around a <strong>$150/hr rate</strong>
         </li>
       </ul>
